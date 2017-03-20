@@ -25,12 +25,12 @@ public class Game {
 	           //  7 means 6 incorrect guesses, user has lost game
     
     private String word;   // the word to be guessed 
-    private String displayWord; // part of the word (if any) to show user
+    private StringBuffer displayWord; // part of the word (if any) to show user
     private ArrayList<String> wordlist;  // list of words
     
     public Game() {
         word="computer";
-        displayWord=createDisplayWord(word);
+        createDisplayWord();
         state=1;
         wordlist=null;
         generator = new Random();
@@ -45,13 +45,13 @@ public class Game {
     }
     
     public String getDisplayWord(){
-        return displayWord;
+        return displayWord.toString();
     }
     
     public void startNewGame() {
         state = 1;
         word = "computer";
-        displayWord = "_ _ _ _ _ _ _ _ ";
+        createDisplayWord();
         
     }
     
@@ -73,7 +73,7 @@ public class Game {
                 } else {
                     return 2; // bad guess, continue
                 }
-            } else if ( displayWord.contains("_")) {
+            } else if ( displayWord.indexOf("_") >= 0) {
                return 0; // continue game, with good guess
             } else {
                return 1; // all characters has been guessed, user has won game.
@@ -90,7 +90,7 @@ public class Game {
         boolean correctGuess = false;
         for (int i=0; i<word.length(); i++) {
             if (word.charAt(i)==guess){
-                    displayWord = displayWord.substring(0,2*i)+guess+displayWord.substring(2*i+1);
+                    displayWord.replace(2*i, 2*i+1, Character.toString(guess)); 
                     correctGuess=true;
                 }
         }
@@ -103,12 +103,12 @@ public class Game {
      * @param word
      * @return 
      */
-    private String createDisplayWord(String word){
-        String display="";
-        for (int i=0; i<word.length(); i++) {
-            display = display+ "_ ";
+    private void createDisplayWord(){
+        displayWord = new StringBuffer("_");
+        for (int i=1; i<word.length(); i++) {
+            displayWord.append(" _");
         }
-        return display;
+   
     }
     
        /**
