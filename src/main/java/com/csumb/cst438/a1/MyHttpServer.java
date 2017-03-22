@@ -113,7 +113,7 @@ public class MyHttpServer {
                 /*
                  * send a gif file
                  */
-                public static void sendFile(HttpExchange t, String filename) {
+                private static void sendFile(HttpExchange t, String filename) {
 
                         try {
                                 File file = new File(RESOURCE_DIR + filename);
@@ -137,7 +137,7 @@ public class MyHttpServer {
                 /*
                 * generate a random cookie which is a random long integer
                 */
-                 public String generateCookie() {
+                 private String generateCookie() {
                     return Long.toString(generator.nextLong());
                  }
                  
