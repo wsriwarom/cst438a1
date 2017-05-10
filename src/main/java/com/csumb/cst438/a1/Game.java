@@ -50,7 +50,7 @@ public class Game {
     
     public void startNewGame() {
         state = 1;
-        word = randomWord();
+        word = randomWord(); //use randomWord to generate the word
         createDisplayWord();
         
     }
@@ -64,7 +64,15 @@ public class Game {
      *        3 = bad guess.  Lost game.
      */
     public int playGame(char guess) {
+            guess = Character.toLowerCase(guess); // convert any letter into lower case
+            
+            if(!checkLetter(guess)){
+                return 4; // chooses case 4 without counting the state and continue
+            }
+            
+            
             boolean correctGuess = updateDisplayWord(guess);
+            
             if (correctGuess==false) { 
                 state++;
                 if (state==7) {
@@ -75,6 +83,7 @@ public class Game {
                 }
             } else if ( displayWord.indexOf("_") >= 0) {
                return 0; // continue game, with good guess
+
             } else {
                return 1; // all characters has been guessed, user has won game.
             }
@@ -88,11 +97,15 @@ public class Game {
      */
     private boolean updateDisplayWord(char guess){
         boolean correctGuess = false;
+      
         for (int i=0; i<word.length(); i++) {
             if (word.charAt(i)==guess){
                     displayWord.replace(2*i, 2*i+1, Character.toString(guess)); 
                     correctGuess=true;
                 }
+          
+           
+                
         }
         return correctGuess;
         
@@ -116,6 +129,11 @@ public class Game {
      * 
      * @return a word from the list
      */
+    private boolean checkLetter(char guess) //method to check if it's a letter entered
+    {
+        return Character.isLetter(guess);
+    }
+    
     private String randomWord() {
 	try {
             if (wordlist == null) {
