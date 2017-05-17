@@ -4,6 +4,7 @@ import java.util.*;
 import com.sun.net.httpserver.*;
 import java.io.*;
 
+
 public class MyHttpServer {
 
 	static final String RESOURCE_DIR = "src/main/resources/";
@@ -36,13 +37,16 @@ public class MyHttpServer {
                  * handle an HTTP request
                  * @param t
                  * @throws IOException 
+                 * 
                  */
 		public void handle(HttpExchange t) throws IOException {
 			String uri = t.getRequestURI().toString();
 			System.out.println("URI=" + uri);
 			if (uri.endsWith(".gif") || uri.endsWith(".ico")) {
 				// http get request for an image file
-				sendFile(t, uri.substring(1));
+				
+                                
+                                sendFile(t, uri.substring(1));
 			} else {
 				// come here to play the game
                                 String response = "";
@@ -50,6 +54,8 @@ public class MyHttpServer {
                                 String requestCookie = t.getRequestHeaders().getFirst("Cookie");
                                 System.out.println("Cookie=" + requestCookie);
                                 // if there is no cookie, or it is "0" or differfent from the current value, then start a new game
+                                
+                                    
                                 if (requestCookie==null || requestCookie.equals("0") || cookie.equals("0") || !requestCookie.equals(cookie)) {
                                     game.startNewGame();
                                     cookie=generateCookie();    
@@ -60,8 +66,11 @@ public class MyHttpServer {
                                             + "Guess a character <input type=\"text\" name=\"guess\"><br>"
                                             + "<input type=\"submit\" value=\"Submit\">" + "</form></body></html>";
                                 } else {
+                                    
+                                    if (checkCase(uri)){
                                     // continue with current game
                                     char ch = uri.charAt(uri.length()-1);  // letter that user has guessed
+                                    
                                     int result = game.playGame(ch);
                                     switch(result) {
                                         case 0: // good guess, continue game
@@ -93,7 +102,30 @@ public class MyHttpServer {
                                             + "</body></html>";
                                              cookie="0";
                                              break;
+                                        case 4: // no letter guess invalid, continue game
+                                            response = "<!DOCTYPE html><html><head><title>MyHttpServer</title></head><body><h2>Hangman</h2>"
+                                            + "<img src=\"" + "h" + game.getState() + ".gif" + "\">"
+                                            + "<h2 style=\"font-family:'Lucida Console', monospace\"> " + game.getDisplayWord() + "</h2>"
+                                            + "<form action=\"/\" method=\"get\"> "
+                                            + "Guess a character <input type=\"text\" name=\"guess\"><br>"
+                                            + "<h2>You Enter Non Letter Character!</h2>"
+                                            + "<input type=\"submit\" value=\"Submit\">" + "</form></body></html>";
+                                            break;
                                     }
+                                }
+                                
+                                else {
+                                    response = "<!DOCTYPE html><html><head><title>MyHttpServer</title></head><body><h2>Hangman</h2>"
+                                   + "<img src=\"" + "h" + game.getState() + ".gif" + "\">"
+                                   + "<h2 style=\"font-family:'Lucida Console', monospace\"> " + game.getDisplayWord() + "</h2>"
+                                   + "<h2 style=\"font-family:'Lucida Console', monospace: color:Red\"> Invalid Input! Please try again </h2>"
+                                   + "<form action=\"/\" method=\"get\"> "
+                                   + "Guess a character <input type=\"text\" name=\"guess\"><br>"
+                                   + "<input type=\"submit\" value=\"Submit\">" + "</form></body></html>";
+                   }
+ 
+                                    
+                                    
                                     
                                 }
                                 t.getResponseHeaders().set("Content-Type", "text/html");
@@ -140,6 +172,22 @@ public class MyHttpServer {
                  private String generateCookie() {
                     return Long.toString(generator.nextLong());
                  }
+                 private boolean checkCase(String uri) {
+           String input = uri.substring(8);
+
+           if (input.length() > 1 || input.isEmpty()) {
+               return false;
+           } else {
+               char input2 = input.charAt(0);
+               if (Character.isLetter(input2)) {
+                   return true;
+               } else {
+                   return false;
+               }
+           }
+         }
+                 
+                 
                  
         }  // end of static class MyHandler
         
