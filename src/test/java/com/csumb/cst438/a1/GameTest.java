@@ -125,22 +125,46 @@ public class GameTest {
         assertEquals(3,result);
  
         instance.startNewGame();
-        result = instance.playGame('c');
-        assertEquals(0,result);
-        result = instance.playGame('o');
-        assertEquals(0,result);
-        result = instance.playGame('m');
-        assertEquals(0,result);
-        result = instance.playGame('p');
-        assertEquals(0,result);
-        result = instance.playGame('u');
-        assertEquals(0,result);
-        result = instance.playGame('t');
-        assertEquals(0,result);
-        result = instance.playGame('e');
-        assertEquals(0,result);
-        result = instance.playGame('r');
-        assertEquals(1,result);
+        String word = instance.getWord();
+        System.out.println(word);
+        ArrayList<Character> wordChars = new ArrayList<>();
+        
+        for(int i=0; i < word.length(); i++)
+        {
+            char test = word.charAt(i);
+            if(wordChars.contains(test))
+            {
+                
+                wordChars.add(test);
+            
+            }
+        System.out.println(wordChars);
+        
+        for(i=0; i < wordChars.size(); i++)
+        {
+            guess = wordChars.get(i);
+            
+            if (i == 3)
+            {
+                guess = Character.toLowerCase(guess);
+            }
+            System.out.println(guess);
+            result = instance.playGame(guess);
+            
+            if(wordChars.size()-1 == 1)
+            {
+                assertEquals(1, result);
+            }
+            else
+            {
+                assertEquals(0, result);
+            }
+        
+        }
+          
+        
+        
+        }
     }
     
 }
