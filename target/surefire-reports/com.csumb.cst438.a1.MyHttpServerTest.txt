@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: com.csumb.cst438.a1.MyHttpServerTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.004 sec <<< FAILURE!
-testHandle(com.csumb.cst438.a1.MyHttpServerTest)  Time elapsed: 0.003 sec  <<< FAILURE!
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.042 sec <<< FAILURE!
+testHandle(com.csumb.cst438.a1.MyHttpServerTest)  Time elapsed: 0.035 sec  <<< FAILURE!
 org.junit.ComparisonFailure: Bad response body. expected:<... monospace"> _ _ _ _[ _ _ _ _]</h2><form action="/...> but was:<... monospace"> _ _ _ _[]</h2><form action="/...>
 	at org.junit.Assert.assertEquals(Assert.java:115)
 	at com.csumb.cst438.a1.MyHttpServerTest.testHandle(MyHttpServerTest.java:67)

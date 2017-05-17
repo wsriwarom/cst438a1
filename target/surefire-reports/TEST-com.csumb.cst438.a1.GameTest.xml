@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="5" failures="1" name="com.csumb.cst438.a1.GameTest" time="0.288" errors="0" skipped="0">
+<testsuite tests="5" failures="0" name="com.csumb.cst438.a1.GameTest" time="0.552" errors="1" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/jre/lib"/>
@@ -62,13 +62,9 @@
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="com.csumb.cst438.a1.GameTest" name="testPlayGame" time="0.084">
-    <failure message="expected:&lt;0&gt; but was:&lt;2&gt;" type="java.lang.AssertionError">java.lang.AssertionError: expected:&lt;0&gt; but was:&lt;2&gt;
-	at org.junit.Assert.fail(Assert.java:88)
-	at org.junit.Assert.failNotEquals(Assert.java:834)
-	at org.junit.Assert.assertEquals(Assert.java:645)
-	at org.junit.Assert.assertEquals(Assert.java:631)
-	at com.csumb.cst438.a1.GameTest.testPlayGame(GameTest.java:133)
+  <testcase classname="com.csumb.cst438.a1.GameTest" name="testPlayGame" time="0.163">
+    <error message="com.csumb.cst438.a1.ArrayList.contains(C)Z" type="java.lang.NoSuchMethodError">java.lang.NoSuchMethodError: com.csumb.cst438.a1.ArrayList.contains(C)Z
+	at com.csumb.cst438.a1.GameTest.testPlayGame(GameTest.java:135)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -102,12 +98,13 @@
 	at org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:175)
 	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
-</failure>
+</error>
     <system-out>playGame
+shallow
 </system-out>
   </testcase>
   <testcase classname="com.csumb.cst438.a1.GameTest" name="testGetState" time="0.001"/>
-  <testcase classname="com.csumb.cst438.a1.GameTest" name="testStartNewGame" time="0.006"/>
-  <testcase classname="com.csumb.cst438.a1.GameTest" name="testGetWord" time="0.002"/>
-  <testcase classname="com.csumb.cst438.a1.GameTest" name="testGetDisplayWord" time="0.011"/>
+  <testcase classname="com.csumb.cst438.a1.GameTest" name="testStartNewGame" time="0.004"/>
+  <testcase classname="com.csumb.cst438.a1.GameTest" name="testGetWord" time="0.005"/>
+  <testcase classname="com.csumb.cst438.a1.GameTest" name="testGetDisplayWord" time="0.002"/>
 </testsuite>

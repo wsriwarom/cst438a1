@@ -64,6 +64,12 @@ public class Game {
      *        3 = bad guess.  Lost game.
      */
     public int playGame(char guess) {
+            guess = Character.toLowerCase(guess); // convert any letter into lower case
+            
+            if(!checkLetter(guess)){
+                return 4; // chooses case 4 without counting the state and continue
+            }
+            
             
             boolean correctGuess = updateDisplayWord(guess);
             
@@ -123,6 +129,12 @@ public class Game {
      * 
      * @return a word from the list
      */
+
+
+    private boolean checkLetter(char guess) //method to check if it's a letter entered
+    {
+        return Character.isLetter(guess);
+    }
     
     private String randomWord() {
 	try {
